@@ -61,7 +61,7 @@ class DecimalsTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => 12345],
-            ['amount' => new Decimals(4,2)]
+            ['amount' => new Decimals(4, 2)]
         );
 
         $this->assertTrue($validator->fails());
@@ -71,7 +71,7 @@ class DecimalsTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => 0.25],
-            ['amount' => new Decimals(1,1)]
+            ['amount' => new Decimals(1, 1)]
         );
 
         $this->assertTrue($validator->fails());
