@@ -1,0 +1,38 @@
+<?php
+
+namespace Tests\Unit;
+
+use Tests\TestCase;
+use Tests\Utils\User;
+
+class SetAttributesUppercaseTest extends TestCase
+{
+    function test_case_is_applied()
+    {
+        $user = new User(['name' => 'luis arce']);
+        $this->assertEquals('LUIS ARCE', $user->name);
+
+        $user->fill(['name' => 'andrés arce']);
+        $this->assertEquals('ANDRÉS ARCE', $user->name);
+
+        $user->name = 'pizza';
+        $this->assertEquals('PIZZA', $user->name);
+
+        $user->setAttribute('name', 'rolling stones');
+        $this->assertEquals('ROLLING STONES', $user->name);
+    }
+
+    function test_dont_apply_to_unwanted_attributes()
+    {
+        $user = new User(['name' => 'luis arce', 'email' => 'luilliarcec@gmail.com']);
+        $this->assertEquals('LUIS ARCE', $user->name);
+        $this->assertEquals('luilliarcec@gmail.com', $user->email);
+    }
+
+    function test_dont_apply_to_sensitive_attributes()
+    {
+        $user = new User(['name' => 'luis arce', 'password' => 'root']);
+        $this->assertEquals('LUIS ARCE', $user->name);
+        $this->assertEquals('root', $user->password);
+    }
+}
