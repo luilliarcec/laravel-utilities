@@ -53,7 +53,8 @@ class BelongsToAuthTest extends TestCase
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 2']);
 
-        $this->assertTrue(Invoice::all()->contains('description', 'Invoice 2'));
-        $this->assertFalse(Invoice::all()->contains('description', 'Invoice 1'));
+        $invoices = Invoice::all();
+        $this->assertTrue($invoices->contains('description', 'Invoice 2'));
+        $this->assertFalse($invoices->contains('description', 'Invoice 1'));
     }
 }
