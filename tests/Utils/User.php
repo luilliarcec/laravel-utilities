@@ -2,11 +2,11 @@
 
 namespace Tests\Utils;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticable;
 use Luilliarcec\Utilities\Concerns\SetAttributesUppercase;
 
-class User extends Model
+class User extends Authenticable
 {
     use SetAttributesUppercase;
 
