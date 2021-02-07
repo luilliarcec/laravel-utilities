@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Luilliarcec\Utilities\Rules\Decimals;
 use Tests\TestCase;
 
-class DecimalsTest extends TestCase
+class DecimalsRuleTest extends TestCase
 {
     function test_does_not_generate_error_when_the_number_is_a_string()
     {

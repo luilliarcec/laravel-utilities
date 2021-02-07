@@ -7,7 +7,7 @@ use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
 
-class AuthValidationsTest extends TestCase
+class AuthRuleTest extends TestCase
 {
     function test_a()
     {
