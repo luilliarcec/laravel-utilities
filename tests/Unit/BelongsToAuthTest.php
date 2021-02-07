@@ -57,4 +57,19 @@ class BelongsToAuthTest extends TestCase
         $this->assertTrue($invoices->contains('description', 'Invoice 2'));
         $this->assertFalse($invoices->contains('description', 'Invoice 1'));
     }
+
+    function test_the_global_scope_is_removed_with_a_method_call()
+    {
+        (new Invoice())
+            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->fill(['description' => 'Invoice 1'])
+            ->saveQuietly();
+
+        $this->actingAs(User::create(['name' => 'luis arce']));
+        Invoice::create(['description' => 'Invoice 2']);
+
+        $invoices = Invoice::withoutAuth()->get();
+        $this->assertTrue($invoices->contains('description', 'Invoice 2'));
+        $this->assertTrue($invoices->contains('description', 'Invoice 1'));
+    }
 }
