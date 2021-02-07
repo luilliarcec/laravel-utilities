@@ -33,4 +33,9 @@ class User extends Model
     protected $dontApplyCase = [
         'email'
     ];
+
+    public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
