@@ -11,7 +11,10 @@ trait BelongsToAuth
 
     public function user()
     {
-        return $this->belongsTo(config('auth.providers.users.model'), self::$authIdColumn)->withTrashed();
+        return $this->belongsTo(
+            config('auth.providers.users.model'),
+            self::$authIdColumn
+        )->withTrashed();
     }
 
     public static function bootHasCompany()
