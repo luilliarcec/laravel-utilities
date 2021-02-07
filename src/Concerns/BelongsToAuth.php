@@ -2,11 +2,13 @@
 
 namespace Luilliarcec\Utilities\Concerns;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Luilliarcec\Utilities\Scopes\AuthScope;
 
 /**
- * @method static static|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder withoutAuth()
+ * @method static static|\Illuminate\Database\Eloquent\Builder|Builder withoutAuth()
  */
 trait BelongsToAuth
 {
@@ -21,7 +23,7 @@ trait BelongsToAuth
         static::addGlobalScope(new AuthScope);
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(config('auth.providers.users.model'), self::$authIdColumn);
     }
