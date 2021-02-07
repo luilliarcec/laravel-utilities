@@ -3,6 +3,7 @@
 namespace Tests\Utils;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Luilliarcec\Utilities\Concerns\SetAttributesUppercase;
 
 class User extends Model
@@ -34,7 +35,7 @@ class User extends Model
         'email'
     ];
 
-    public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
     }
