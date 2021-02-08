@@ -26,5 +26,12 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('auth.providers.users.model', User::class);
+
+        /** Database */
+        $app['config']->set('database.default', 'testdb');
+        $app['config']->set('database.connections.testdb', [
+            'driver' => 'sqlite',
+            'database' => ':memory:'
+        ]);
     }
 }
