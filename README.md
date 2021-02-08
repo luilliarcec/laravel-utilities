@@ -2,7 +2,6 @@
 
 ![run-tests](https://github.com/luilliarcec/laravel-utilities/workflows/run-tests/badge.svg)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/luilliarcec/laravel-utilities.svg)](https://packagist.org/packages/luilliarcec/laravel-utilities)
-[![Quality Score](https://img.shields.io/scrutinizer/g/luilliarcec/laravel-utilities)](https://scrutinizer-ci.com/g/luilliarcec/laravel-utilities)
 [![Total Downloads](https://img.shields.io/packagist/dt/luilliarcec/laravel-utilities)](https://packagist.org/packages/luilliarcec/laravel-utilities)
 [![GitHub license](https://img.shields.io/github/license/luilliarcec/laravel-utilities)](https://github.com/luilliarcec/laravel-utilities/blob/develop/LICENSE.md)
 
