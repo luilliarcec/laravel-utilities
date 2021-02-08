@@ -2,14 +2,14 @@
 
 namespace Tests;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Luilliarcec\Utilities\UtilitiesServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Tests\Utils\User;
 
 class TestCase extends Orchestra
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
