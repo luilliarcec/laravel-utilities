@@ -14,29 +14,56 @@ class AuthRuleTest extends TestCase
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 1']);
 
-        $validator = $this->app['validator']->make(
-            ['invoice_id' => 1],
-            ['invoice_id' => AuthRules::exists('invoices', 'id')]
+        $this->assertFalse(
+            $this->app['validator']
+                ->make(
+                    ['invoice_id' => 1],
+                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                )
+                ->fails()
         );
 
-        $this->assertFalse($validator->fails());
-    }
-
-    function test_validation_fails_when_record_does_not_belong_to_authenticated_user()
-    {
         (new Invoice())
             ->user()->associate(User::create(['name' => 'andres cardenas']))
-            ->fill(['description' => 'Invoice 1'])
+            ->fill(['description' => 'Invoice 2'])
             ->saveQuietly();
 
-        $this->actingAs(User::create(['name' => 'luis arce']));
-        Invoice::create(['description' => 'Invoice 2']);
+        $this->assertTrue(
+            $this->app['validator']
+                ->make(
+                    ['invoice_id' => 2],
+                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                )
+                ->fails()
+        );
+    }
 
-        $validator = $this->app['validator']->make(
-            ['invoice_id' => 1],
-            ['invoice_id' => AuthRules::exists('invoices', 'id')]
+    function test_validate_that_the_record_is_unique_per_authenticated_user()
+    {
+        $this->actingAs(User::create(['name' => 'luis arce']));
+        Invoice::create(['description' => 'Invoice 1']);
+
+        $this->assertTrue(
+            $this->app['validator']
+                ->make(
+                    ['invoice_id' => 1],
+                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                )
+                ->fails()
         );
 
-        $this->assertTrue($validator->fails());
+        (new Invoice())
+            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->fill(['description' => 'Invoice 2'])
+            ->saveQuietly();
+
+        $this->assertFalse(
+            $this->app['validator']
+                ->make(
+                    ['invoice_id' => 2],
+                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                )
+                ->fails()
+        );
     }
 }
