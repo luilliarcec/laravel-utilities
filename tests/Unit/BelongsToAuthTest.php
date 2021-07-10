@@ -3,12 +3,21 @@
 namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Auth;
+use Luilliarcec\Utilities\Concerns\BelongsToAuth;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
 
 class BelongsToAuthTest extends TestCase
 {
+    function test_that_the_foreign_key_name_is_configurable()
+    {
+        $this->assertEquals('user_id', BelongsToAuth::getAuthIdColumn());
+
+        $this->app['config']->set('utilities.auth_foreign_id_column', 'foreign_user_id');
+        $this->assertEquals('foreign_user_id', BelongsToAuth::getAuthIdColumn());
+    }
+
     function test_get_the_table_name_and_column_name_of_the_relation()
     {
         $this->assertEquals(
