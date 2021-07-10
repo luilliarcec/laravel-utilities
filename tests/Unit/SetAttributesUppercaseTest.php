@@ -24,9 +24,11 @@ class SetAttributesUppercaseTest extends TestCase
 
     function test_dont_apply_to_unwanted_attributes()
     {
-        $user = new User(['name' => 'luis arce', 'email' => 'luilliarcec@gmail.com']);
+        $user = new User(['name' => 'luis arce']);
         $this->assertEquals('LUIS ARCE', $user->name);
-        $this->assertEquals('luilliarcec@gmail.com', $user->email);
+
+        $user->username = 'larcec';
+        $this->assertEquals('larcec', $user->username);
     }
 
     function test_dont_apply_to_sensitive_attributes()
