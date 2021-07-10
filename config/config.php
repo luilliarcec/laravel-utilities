@@ -6,10 +6,16 @@ return [
     /**
      * Name of the column that represents the foreign key of the creator user.
      * This column is used to identify the records associated with that user.
-     * Used in: ...\Concerns\BelongsToAuth | ...\Rules\Auth
      */
 
     'auth_foreign_id_column' => 'user_id',
 
     /** SetAttributesUppercase */
+
+    /**
+     * Here you should register all those attributes that should be ignored globally,
+     * or if you don't want to mess up your model, add your attributes to ignore here.
+     */
+
+    'attributes_ignored_globally' => [],
 ];
