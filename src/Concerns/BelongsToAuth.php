@@ -12,8 +12,6 @@ use Luilliarcec\Utilities\Scopes\AuthScope;
  */
 trait BelongsToAuth
 {
-    public static string $authIdColumn = 'user_id';
-
     public static function bootBelongsToAuth()
     {
         static::creating(function ($model) {
@@ -23,13 +21,18 @@ trait BelongsToAuth
         static::addGlobalScope(new AuthScope);
     }
 
+    public static function getAuthIdColumn(): string
+    {
+        return (string)config('utilities.auth_foreign_id_column');
+    }
+
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('auth.providers.users.model'), self::$authIdColumn);
+        return $this->belongsTo(config('auth.providers.users.model'), self::getAuthIdColumn());
     }
 
     public function getQualifiedAuthIdColumn(): string
     {
-        return $this->getTable() . '.' . self::$authIdColumn;
+        return $this->getTable() . '.' . self::getAuthIdColumn();
     }
 }
