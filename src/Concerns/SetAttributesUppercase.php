@@ -23,6 +23,24 @@ trait SetAttributesUppercase
     }
 
     /**
+     * Attributes that should be ignored by default
+     *
+     * @return string[]
+     */
+    protected function attributesIgnoredByDefault(): array
+    {
+        return [
+            'token',
+            'email',
+            'password',
+            'remember_token',
+            'two_factor_recovery_codes',
+            'two_factor_secret',
+            'profile_photo_url',
+        ];
+    }
+
+    /**
      * Apply the case to the attribute
      *
      * @param $key
@@ -43,30 +61,33 @@ trait SetAttributesUppercase
      */
     private function shouldBeApplied($key): bool
     {
+        return !in_array($key, $this->dontApply());
+    }
+
+    /**
+     * Attributes that should be ignored globally/
+     *
+     * @return string[]
+     */
+    private function attributesIgnoredGlobally(): array
+    {
+        return (array)config('utilities.attributes_ignored_globally');
+    }
+
+    /**
+     * Returns the array of attributes to which the case should not be applied.
+     *
+     * @return string[]
+     */
+    private function dontApply(): array
+    {
         $dontApply = $this->attributesIgnoredByDefault();
+        $dontApply = array_merge($dontApply, $this->attributesIgnoredGlobally());
 
         if (property_exists($this, 'dontApplyCase')) {
             $dontApply = array_merge($dontApply, $this->dontApplyCase);
         }
 
-        return !in_array($key, $dontApply);
-    }
-
-    /**
-     * Attributes that should be ignored by default
-     *
-     * @return string[]
-     */
-    protected function attributesIgnoredByDefault(): array
-    {
-        return [
-            'token',
-            'email',
-            'password',
-            'remember_token',
-            'two_factor_recovery_codes',
-            'two_factor_secret',
-            'profile_photo_url',
-        ];
+        return $dontApply;
     }
 }
