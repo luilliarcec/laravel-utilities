@@ -11,7 +11,11 @@ class UtilitiesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/config.php' => config_path('utilities.php'),
+            ], 'config');
+        }
     }
 
     /**
@@ -19,6 +23,6 @@ class UtilitiesServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'utilities');
     }
 }
