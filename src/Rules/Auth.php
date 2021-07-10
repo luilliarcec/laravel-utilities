@@ -12,12 +12,12 @@ class Auth
     public static function exists($table, $column = 'NULL'): Exists
     {
         return (new Exists($table, $column))
-            ->where(BelongsToAuth::$authIdColumn, Authenticated::id());
+            ->where(BelongsToAuth::getAuthIdColumn(), Authenticated::id());
     }
 
     public static function unique($table, $column = 'NULL'): Unique
     {
         return (new Unique($table, $column))
-            ->where(BelongsToAuth::$authIdColumn, Authenticated::id());
+            ->where(BelongsToAuth::getAuthIdColumn(), Authenticated::id());
     }
 }
