@@ -26,7 +26,6 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('auth.providers.users.model', User::class);
-        $app['config']->set('utilities.auth_foreign_id_column', 'user_id');
 
         /** Database */
         $app['config']->set('database.default', 'testdb');
