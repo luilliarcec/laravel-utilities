@@ -32,7 +32,7 @@ class User extends Authenticable
     ];
 
     protected $dontApplyCase = [
-        'username'
+        'username',
     ];
 
     public function invoices(): HasMany
