@@ -100,10 +100,10 @@ Invoice::withoutAuth()
 
 ```php
 
-use Luilliarcec\Utilities\Rules\Auth;
+use Luilliarcec\Utilities\Rules\AuthRule;
 
 Request::validate([
-    'invoice_id' => Auth::exists('invoices', 'id') // ->where(...)
+    'invoice_id' => AuthRule::exists('invoices', 'id') // ->where(...)
 ]);
 ```
 
@@ -112,14 +112,14 @@ Request::validate([
 If you want to check decimal numbers, and the number of decimal places, you can use this rule as follows.
 
 ```php
-use Luilliarcec\Utilities\Rules\Decimals;
+use Luilliarcec\Utilities\Rules\DecimalsRule;
 
 Request::validate([
-    'amount' => new Decimals // by default they are 8 integers and 2 decimals
+    'amount' => new DecimalsRule // by default they are 8 integers and 2 decimals
 ]);
 
 Request::validate([
-    'amount' => new Decimals(20, 4) // 20 integers and 4 decimals
+    'amount' => new DecimalsRule(20, 4) // 20 integers and 4 decimals
 ]);
 ```
 
