@@ -9,8 +9,8 @@ trait SetAttributesUppercase
     /**
      * Set a given attribute on the model.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string  $key
+     * @param  mixed  $value
      * @return mixed
      */
     public function setAttribute($key, $value): mixed
@@ -23,7 +23,7 @@ trait SetAttributesUppercase
     }
 
     /**
-     * Attributes that should be ignored by default
+     * Attributes that should be ignored by default.
      *
      * @return string[]
      */
@@ -41,7 +41,7 @@ trait SetAttributesUppercase
     }
 
     /**
-     * Apply the case to the attribute
+     * Apply the case to the attribute.
      *
      * @param $key
      * @param $value
@@ -54,24 +54,24 @@ trait SetAttributesUppercase
     }
 
     /**
-     * Checks if the case should be applied to the attribute
+     * Checks if the case should be applied to the attribute.
      *
      * @param $key
      * @return bool
      */
     private function shouldBeApplied($key): bool
     {
-        return !in_array($key, $this->dontApply());
+        return ! in_array($key, $this->dontApply());
     }
 
     /**
-     * Attributes that should be ignored globally/
+     * Attributes that should be ignored globally/.
      *
      * @return string[]
      */
     private function attributesIgnoredGlobally(): array
     {
-        return (array)config('utilities.attributes_ignored_globally');
+        return (array) config('utilities.attributes_ignored_globally');
     }
 
     /**
