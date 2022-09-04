@@ -14,7 +14,7 @@ class BelongsToAuthenticatedTest extends TestCase
     {
         $this->assertEquals(
             'invoices.user_id',
-            (new Invoice())->getQualifiedAuthKeyNameColumn()
+            (new Invoice())->getQualifiedAuthenticatedKeyNameColumn()
         );
     }
 

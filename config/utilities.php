@@ -8,7 +8,7 @@ return [
      * This column is used to identify the records associated with that user.
      */
 
-    'auth_key_name' => 'user_id',
+    'authenticated_key_name' => 'user_id',
 
     /** SetAttributesUppercase */
 

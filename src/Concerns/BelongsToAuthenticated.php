@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Luilliarcec\Utilities\Scopes\AuthenticatedScope;
 
 /**
- * @method static static|\Illuminate\Database\Eloquent\Builder|Builder withoutAuth()
+ * @method static static|\Illuminate\Database\Eloquent\Builder|Builder withoutAuthenticated()
  */
 trait BelongsToAuthenticated
 {
@@ -24,24 +24,24 @@ trait BelongsToAuthenticated
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo($model = $this->getAuthModelName(), $this->getAuthKeyNameColumn())
+        return $this->belongsTo($model = $this->getAuthenticatedModelName(), $this->getAuthenticatedKeyNameColumn())
             ->when($this->hasSoftDeletes($model), fn ($query) => $query->withTrashed())
             ->withDefault();
     }
 
-    public function getAuthKeyNameColumn(): string
+    public function getAuthenticatedKeyNameColumn(): string
     {
-        return (string) config('utilities.auth_key_name');
+        return (string) config('utilities.authenticated_key_name');
     }
 
-    public function getAuthModelName(): string
+    public function getAuthenticatedModelName(): string
     {
         return (string) config('auth.providers.users.model');
     }
 
-    public function getQualifiedAuthKeyNameColumn(): string
+    public function getQualifiedAuthenticatedKeyNameColumn(): string
     {
-        return $this->qualifyColumn($this->getAuthKeyNameColumn());
+        return $this->qualifyColumn($this->getAuthenticatedKeyNameColumn());
     }
 
     protected function hasSoftDeletes($model): bool
