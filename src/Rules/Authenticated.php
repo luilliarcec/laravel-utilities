@@ -22,6 +22,6 @@ class Authenticated
 
     public static function getAuthenticatedKeyNameColumn(): string
     {
-        return (string) config('utilities.authenticated_key_name');
+        return (string) config('utilities.authenticated.key');
     }
 }

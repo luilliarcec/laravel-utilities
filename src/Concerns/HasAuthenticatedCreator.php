@@ -24,12 +24,12 @@ trait HasAuthenticatedCreator
 
     public function getAuthenticatedKeyNameColumn(): string
     {
-        return (string) config('utilities.authenticated_key_name');
+        return (string) config('utilities.authenticated.key');
     }
 
     public function getAuthenticatedModelName(): string
     {
-        return (string) config('auth.providers.users.model');
+        return (string) config('utilities.authenticated.model');
     }
 
     public function getQualifiedAuthenticatedKeyNameColumn(): string

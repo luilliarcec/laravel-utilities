@@ -1,14 +1,13 @@
 <?php
 
 return [
-    /** BelongsToAuth */
+    /** HasAuthenticatedCreator */
 
-    /**
-     * Name of the column that represents the foreign key of the creator user.
-     * This column is used to identify the records associated with that user.
-     */
-
-    'authenticated_key_name' => 'user_id',
+    'authenticated' => [
+        'key' => 'user_id', // Foreign Key Name
+        'model' => config('auth.providers.users.model'), // Model Name
+        'use_constrained' => false, // For macro generate column
+    ],
 
     /** SetAttributesUppercase */
 
