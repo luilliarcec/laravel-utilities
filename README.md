@@ -80,11 +80,11 @@ You can use the `BelongsTo Auth` Trait.
 
 ```php
 // ...
-use Luilliarcec\Utilities\Concerns\BelongsToAuth;
+use Luilliarcec\Utilities\Concerns\BelongsToAuthenticated;
 
 class Invoice extends Model
 {
-    use BelongsToAuth;
+    use BelongsToAuthenticated;
 }
 ```
 
@@ -100,10 +100,10 @@ Invoice::withoutAuth()
 
 ```php
 
-use Luilliarcec\Utilities\Rules\Auth;
+use Luilliarcec\Utilities\Rules\Authenticated;
 
 Request::validate([
-    'invoice_id' => Auth::exists('invoices', 'id') // ->where(...)
+    'invoice_id' => Authenticated::exists('invoices', 'id') // ->where(...)
 ]);
 ```
 

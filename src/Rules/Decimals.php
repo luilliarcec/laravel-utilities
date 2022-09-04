@@ -24,14 +24,14 @@ class Decimals implements Rule
 
     public function passes($attribute, $value): bool
     {
-        if (!is_string($value) && !is_numeric($value)) {
+        if (! is_string($value) && ! is_numeric($value)) {
             return false;
         }
 
         return preg_match($this->match, $value) > 0;
     }
 
-    public function message()
+    public function message(): string
     {
         return __('The field :attribute must be a number composed of up to :integers integers and :decimals decimals', [
             ':integers' => $this->integers,

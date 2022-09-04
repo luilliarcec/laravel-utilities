@@ -15,7 +15,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/Utils/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/Utils/migrations');
     }
 
     protected function getPackageProviders($app): array
@@ -26,13 +26,12 @@ class TestCase extends Orchestra
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('auth.providers.users.model', User::class);
-        $app['config']->set('utilities.auth_foreign_id_column', 'user_id');
 
         /** Database */
         $app['config']->set('database.default', 'testdb');
         $app['config']->set('database.connections.testdb', [
             'driver' => 'sqlite',
-            'database' => ':memory:'
+            'database' => ':memory:',
         ]);
     }
 }

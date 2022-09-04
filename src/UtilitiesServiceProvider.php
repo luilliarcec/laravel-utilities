@@ -2,27 +2,31 @@
 
 namespace Luilliarcec\Utilities;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class UtilitiesServiceProvider extends ServiceProvider
+class UtilitiesServiceProvider extends PackageServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('utilities.php'),
-            ], 'config');
-        }
+        $package
+            ->name('laravel-utilities')
+            ->hasConfigFile('utilities');
     }
 
-    /**
-     * Register the application services.
-     */
-    public function register()
+    public function packageRegistered()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'utilities');
+        Blueprint::macro('authenticatedKey', function () {
+            $key = config('utilities.authenticated.key');
+
+            $model = config('utilities.authenticated.model');
+
+            config('utilities.authenticated.use_constrained')
+                ? $this->foreignIdFor($model = new $model, $key)->nullable()->constrained($model->getTable())
+                : $this->foreignId($key)->nullable()->index();
+        });
+
+        Blueprint::macro('createdBy', fn () => $this->authenticatedKey());
     }
 }

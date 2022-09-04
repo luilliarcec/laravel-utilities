@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use Luilliarcec\Utilities\Rules\Auth as AuthRules;
+use Luilliarcec\Utilities\Rules\Authenticated;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
 
-class AuthRuleTest extends TestCase
+class AuthenticatedRuleTest extends TestCase
 {
-    function test_validates_that_the_record_exists_with_the_authenticated_user()
+    public function test_validates_that_the_record_exists_with_the_authenticated_user()
     {
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 1']);
@@ -18,7 +18,7 @@ class AuthRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 1],
-                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->exists()]
                 )
                 ->fails()
         );
@@ -32,13 +32,13 @@ class AuthRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 2],
-                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->exists()]
                 )
                 ->fails()
         );
     }
 
-    function test_validate_that_the_record_is_unique_per_authenticated_user()
+    public function test_validate_that_the_record_is_unique_per_authenticated_user()
     {
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 1']);
@@ -47,7 +47,7 @@ class AuthRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 1],
-                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->unique()]
                 )
                 ->fails()
         );
@@ -61,7 +61,7 @@ class AuthRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 2],
-                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->unique()]
                 )
                 ->fails()
         );

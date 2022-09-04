@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class AuthScope implements Scope
+class AuthenticatedScope implements Scope
 {
-    protected array $extensions = ['WithoutAuth'];
+    protected array $extensions = ['withoutAuthenticated'];
 
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where($model->getQualifiedAuthIdColumn(), Auth::id());
+        $builder->where($model->getQualifiedAuthenticatedKeyNameColumn(), Auth::id());
     }
 
     public function extend(Builder $builder)
@@ -23,9 +23,9 @@ class AuthScope implements Scope
         }
     }
 
-    protected function addWithoutAuth(Builder $builder)
+    protected function addWithoutAuthenticated(Builder $builder)
     {
-        $builder->macro('withoutAuth', function (Builder $builder) {
+        $builder->macro('withoutAuthenticated', function (Builder $builder) {
             return $builder->withoutGlobalScope($this);
         });
     }

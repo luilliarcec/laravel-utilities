@@ -3,11 +3,11 @@
 namespace Tests\Utils;
 
 use Illuminate\Database\Eloquent\Model;
-use Luilliarcec\Utilities\Concerns\BelongsToAuth;
+use Luilliarcec\Utilities\Concerns\BelongsToAuthenticated;
 
 class Invoice extends Model
 {
-    use BelongsToAuth;
+    use BelongsToAuthenticated;
 
     protected $fillable = [
         'description',
