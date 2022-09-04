@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedScope implements Scope
 {
-    protected array $extensions = ['WithoutAuth'];
+    protected array $extensions = ['withoutAuthenticated'];
 
     public function apply(Builder $builder, Model $model)
     {
@@ -23,9 +23,9 @@ class AuthenticatedScope implements Scope
         }
     }
 
-    protected function addWithoutAuth(Builder $builder)
+    protected function addWithoutAuthenticated(Builder $builder)
     {
-        $builder->macro('withoutAuth', function (Builder $builder) {
+        $builder->macro('withoutAuthenticated', function (Builder $builder) {
             return $builder->withoutGlobalScope($this);
         });
     }

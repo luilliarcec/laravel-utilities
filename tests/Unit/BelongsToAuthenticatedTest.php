@@ -69,7 +69,7 @@ class BelongsToAuthenticatedTest extends TestCase
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 2']);
 
-        $invoices = Invoice::withoutAuth()->get();
+        $invoices = Invoice::withoutAuthenticated()->get();
         $this->assertTrue($invoices->contains('description', 'Invoice 2'));
         $this->assertTrue($invoices->contains('description', 'Invoice 1'));
     }
