@@ -91,7 +91,7 @@ class Invoice extends Model
 #### Using withoutAuth function
 
 ```php
-Invoice::withoutAuth()
+Invoice::withoutAuthenticated()
     // ->where(...)
     ->get();
 ```
@@ -103,7 +103,7 @@ Invoice::withoutAuth()
 use Luilliarcec\Utilities\Rules\Authenticated;
 
 Request::validate([
-    'invoice_id' => Authenticated::exists('invoices', 'id') // ->where(...)
+    'invoice_id' => Authenticated::make('invoices', 'id')->exists() // ->where(...)
 ]);
 ```
 
