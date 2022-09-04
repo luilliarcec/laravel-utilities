@@ -9,7 +9,7 @@ use Tests\Utils\User;
 
 class AuthenticatedRuleTest extends TestCase
 {
-    function test_validates_that_the_record_exists_with_the_authenticated_user()
+    public function test_validates_that_the_record_exists_with_the_authenticated_user()
     {
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 1']);
@@ -38,7 +38,7 @@ class AuthenticatedRuleTest extends TestCase
         );
     }
 
-    function test_validate_that_the_record_is_unique_per_authenticated_user()
+    public function test_validate_that_the_record_is_unique_per_authenticated_user()
     {
         $this->actingAs(User::create(['name' => 'luis arce']));
         Invoice::create(['description' => 'Invoice 1']);

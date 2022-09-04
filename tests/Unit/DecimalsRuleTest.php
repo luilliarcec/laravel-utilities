@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class DecimalsRuleTest extends TestCase
 {
-    function test_does_not_generate_error_when_the_number_is_a_string()
+    public function test_does_not_generate_error_when_the_number_is_a_string()
     {
         $validator = $this->app['validator']->make(
             ['amount' => '123'],
@@ -17,7 +17,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
-    function test_does_not_generate_error_when_number_is_0()
+    public function test_does_not_generate_error_when_number_is_0()
     {
         $validator = $this->app['validator']->make(
             ['amount' => '0'],
@@ -27,7 +27,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
-    function test_does_not_generate_error_when_number_is_whitespace()
+    public function test_does_not_generate_error_when_number_is_whitespace()
     {
         $validator = $this->app['validator']->make(
             ['amount' => ''],
@@ -37,7 +37,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertFalse($validator->fails());
     }
 
-    function test_null_generates_an_error()
+    public function test_null_generates_an_error()
     {
         $validator = $this->app['validator']->make(
             ['amount' => null],
@@ -47,7 +47,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertTrue($validator->fails());
     }
 
-    function test_anything_that_does_not_have_a_number_format_generates_an_error()
+    public function test_anything_that_does_not_have_a_number_format_generates_an_error()
     {
         $validator = $this->app['validator']->make(
             ['amount' => 'asas'],
@@ -57,7 +57,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertTrue($validator->fails());
     }
 
-    function test_when_the_number_has_more_integers_than_allowed_it_generates_an_error()
+    public function test_when_the_number_has_more_integers_than_allowed_it_generates_an_error()
     {
         $validator = $this->app['validator']->make(
             ['amount' => 12345],
@@ -67,7 +67,7 @@ class DecimalsRuleTest extends TestCase
         $this->assertTrue($validator->fails());
     }
 
-    function test_when_the_number_has_more_decimals_than_allowed_it_generates_an_error()
+    public function test_when_the_number_has_more_decimals_than_allowed_it_generates_an_error()
     {
         $validator = $this->app['validator']->make(
             ['amount' => 0.25],

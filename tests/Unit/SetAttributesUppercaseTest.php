@@ -7,7 +7,7 @@ use Tests\Utils\User;
 
 class SetAttributesUppercaseTest extends TestCase
 {
-    function test_case_is_applied()
+    public function test_case_is_applied()
     {
         $user = new User(['name' => 'luis arce']);
         $this->assertEquals('LUIS ARCE', $user->name);
@@ -22,7 +22,7 @@ class SetAttributesUppercaseTest extends TestCase
         $this->assertEquals('ROLLING STONES', $user->name);
     }
 
-    function test_dont_apply_to_unwanted_attributes()
+    public function test_dont_apply_to_unwanted_attributes()
     {
         $user = new User(['name' => 'luis arce']);
         $this->assertEquals('LUIS ARCE', $user->name);
@@ -31,14 +31,14 @@ class SetAttributesUppercaseTest extends TestCase
         $this->assertEquals('larcec', $user->username);
     }
 
-    function test_dont_apply_to_sensitive_attributes()
+    public function test_dont_apply_to_sensitive_attributes()
     {
         $user = new User(['name' => 'luis arce', 'password' => 'root']);
         $this->assertEquals('LUIS ARCE', $user->name);
         $this->assertEquals('root', $user->password);
     }
 
-    function test_dont_apply_to_globally_ignored_attributes()
+    public function test_dont_apply_to_globally_ignored_attributes()
     {
         $user = new User();
         $user->url = 'doctor.hoo';
