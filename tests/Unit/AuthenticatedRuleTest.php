@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Luilliarcec\Utilities\Rules\Authenticated as AuthRules;
+use Luilliarcec\Utilities\Rules\Authenticated;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
@@ -18,7 +18,7 @@ class AuthenticatedRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 1],
-                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->exists()]
                 )
                 ->fails()
         );
@@ -32,7 +32,7 @@ class AuthenticatedRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 2],
-                    ['invoice_id' => AuthRules::exists('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->exists()]
                 )
                 ->fails()
         );
@@ -47,7 +47,7 @@ class AuthenticatedRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 1],
-                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->unique()]
                 )
                 ->fails()
         );
@@ -61,7 +61,7 @@ class AuthenticatedRuleTest extends TestCase
             $this->app['validator']
                 ->make(
                     ['invoice_id' => 2],
-                    ['invoice_id' => AuthRules::unique('invoices', 'id')]
+                    ['invoice_id' => Authenticated::make('invoices', 'id')->unique()]
                 )
                 ->fails()
         );
