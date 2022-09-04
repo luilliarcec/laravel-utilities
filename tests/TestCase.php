@@ -15,7 +15,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__ . '/Utils/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/Utils/migrations');
     }
 
     protected function getPackageProviders($app): array
