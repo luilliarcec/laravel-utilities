@@ -4,7 +4,7 @@ namespace Luilliarcec\Utilities\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Decimals implements Rule
+class DecimalsRule implements Rule
 {
     private string $match;
     private int $integers;
@@ -31,7 +31,7 @@ class Decimals implements Rule
         return preg_match($this->match, $value) > 0;
     }
 
-    public function message()
+    public function message(): string
     {
         return __('The field :attribute must be a number composed of up to :integers integers and :decimals decimals', [
             ':integers' => $this->integers,

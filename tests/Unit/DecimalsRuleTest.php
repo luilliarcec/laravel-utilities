@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Luilliarcec\Utilities\Rules\Decimals;
+use Luilliarcec\Utilities\Rules\DecimalsRule;
 use Tests\TestCase;
 
 class DecimalsRuleTest extends TestCase
@@ -11,7 +11,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => '123'],
-            ['amount' => new Decimals]
+            ['amount' => new DecimalsRule]
         );
 
         $this->assertFalse($validator->fails());
@@ -21,7 +21,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => '0'],
-            ['amount' => new Decimals]
+            ['amount' => new DecimalsRule]
         );
 
         $this->assertFalse($validator->fails());
@@ -31,7 +31,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => ''],
-            ['amount' => new Decimals]
+            ['amount' => new DecimalsRule]
         );
 
         $this->assertFalse($validator->fails());
@@ -41,7 +41,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => null],
-            ['amount' => new Decimals]
+            ['amount' => new DecimalsRule]
         );
 
         $this->assertTrue($validator->fails());
@@ -51,7 +51,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => 'asas'],
-            ['amount' => new Decimals]
+            ['amount' => new DecimalsRule]
         );
 
         $this->assertTrue($validator->fails());
@@ -61,7 +61,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => 12345],
-            ['amount' => new Decimals(4, 2)]
+            ['amount' => new DecimalsRule(4, 2)]
         );
 
         $this->assertTrue($validator->fails());
@@ -71,7 +71,7 @@ class DecimalsRuleTest extends TestCase
     {
         $validator = $this->app['validator']->make(
             ['amount' => 0.25],
-            ['amount' => new Decimals(1, 1)]
+            ['amount' => new DecimalsRule(1, 1)]
         );
 
         $this->assertTrue($validator->fails());
