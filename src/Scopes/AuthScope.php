@@ -13,7 +13,7 @@ class AuthScope implements Scope
 
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where($model->getQualifiedAuthIdColumn(), Auth::id());
+        $builder->where($model->getQualifiedAuthKeyNameColumn(), Auth::id());
     }
 
     public function extend(Builder $builder)

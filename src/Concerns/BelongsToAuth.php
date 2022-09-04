@@ -3,6 +3,7 @@
 namespace Luilliarcec\Utilities\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Luilliarcec\Utilities\Scopes\AuthScope;
@@ -12,7 +13,7 @@ use Luilliarcec\Utilities\Scopes\AuthScope;
  */
 trait BelongsToAuth
 {
-    public static function bootBelongsToAuth()
+    public static function bootBelongsToAuth(): void
     {
         static::creating(function ($model) {
             $model->user()->associate(Auth::user());
@@ -21,18 +22,30 @@ trait BelongsToAuth
         static::addGlobalScope(new AuthScope);
     }
 
-    public static function getAuthIdColumn(): string
-    {
-        return (string)config('utilities.auth_foreign_id_column');
-    }
-
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('auth.providers.users.model'), self::getAuthIdColumn());
+        return $this->belongsTo($model = $this->getAuthModelName(), $this->getAuthKeyNameColumn())
+            ->when($this->hasSoftDeletes($model), fn ($query) => $query->withTrashed())
+            ->withDefault();
     }
 
-    public function getQualifiedAuthIdColumn(): string
+    public function getAuthKeyNameColumn(): string
     {
-        return $this->getTable() . '.' . self::getAuthIdColumn();
+        return (string) config('utilities.auth_key_name');
+    }
+
+    public function getAuthModelName(): string
+    {
+        return (string) config('auth.providers.users.model');
+    }
+
+    public function getQualifiedAuthKeyNameColumn(): string
+    {
+        return $this->qualifyColumn($this->getAuthKeyNameColumn());
+    }
+
+    protected function hasSoftDeletes($model): bool
+    {
+        return in_array(SoftDeletes::class, class_uses($model));
     }
 }
