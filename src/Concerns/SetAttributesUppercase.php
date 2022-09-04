@@ -13,7 +13,7 @@ trait SetAttributesUppercase
      * @param mixed $value
      * @return mixed
      */
-    public function setAttribute($key, $value)
+    public function setAttribute($key, $value): mixed
     {
         parent::setAttribute($key, $value);
 
@@ -46,7 +46,7 @@ trait SetAttributesUppercase
      * @param $key
      * @param $value
      */
-    private function applyCase($key, $value)
+    private function applyCase($key, $value): void
     {
         if (is_string($value) && $this->shouldBeApplied($key)) {
             $this->attributes[$key] = Str::upper($value);
