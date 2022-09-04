@@ -129,9 +129,9 @@ Request::validate([
 composer test
 ```
 
-## Changelog
+## Releases
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [Releases](https://github.com/luilliarcec/laravel-utilities/releases) for more information what has changed recently.
 
 ## Contributing
 
