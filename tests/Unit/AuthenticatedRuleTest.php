@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use Luilliarcec\Utilities\Rules\AuthRule as AuthRules;
+use Luilliarcec\Utilities\Rules\Authenticated as AuthRules;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
 
-class AuthRuleTest extends TestCase
+class AuthenticatedRuleTest extends TestCase
 {
     function test_validates_that_the_record_exists_with_the_authenticated_user()
     {

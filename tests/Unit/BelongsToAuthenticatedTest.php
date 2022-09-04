@@ -3,12 +3,12 @@
 namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Auth;
-use Luilliarcec\Utilities\Concerns\BelongsToAuth;
+use Luilliarcec\Utilities\Concerns\BelongsToAuthenticated;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
 
-class BelongsToAuthTest extends TestCase
+class BelongsToAuthenticatedTest extends TestCase
 {
     function test_get_the_table_name_and_column_name_of_the_relation()
     {

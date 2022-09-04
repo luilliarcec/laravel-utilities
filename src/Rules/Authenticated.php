@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\Rules\Unique;
 
-class AuthRule
+class Authenticated
 {
     public static function exists($table, $column = 'NULL', $authKeyName = null): Exists
     {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class AuthScope implements Scope
+class AuthenticatedScope implements Scope
 {
     protected array $extensions = ['WithoutAuth'];
 

@@ -80,11 +80,11 @@ You can use the `BelongsTo Auth` Trait.
 
 ```php
 // ...
-use Luilliarcec\Utilities\Concerns\BelongsToAuth;
+use Luilliarcec\Utilities\Concerns\BelongsToAuthenticated;
 
 class Invoice extends Model
 {
-    use BelongsToAuth;
+    use BelongsToAuthenticated;
 }
 ```
 
@@ -100,10 +100,10 @@ Invoice::withoutAuth()
 
 ```php
 
-use Luilliarcec\Utilities\Rules\AuthRule;
+use Luilliarcec\Utilities\Rules\Authenticated;
 
 Request::validate([
-    'invoice_id' => AuthRule::exists('invoices', 'id') // ->where(...)
+    'invoice_id' => Authenticated::exists('invoices', 'id') // ->where(...)
 ]);
 ```
 
@@ -112,14 +112,14 @@ Request::validate([
 If you want to check decimal numbers, and the number of decimal places, you can use this rule as follows.
 
 ```php
-use Luilliarcec\Utilities\Rules\DecimalsRule;
+use Luilliarcec\Utilities\Rules\Decimals;
 
 Request::validate([
-    'amount' => new DecimalsRule // by default they are 8 integers and 2 decimals
+    'amount' => new Decimals // by default they are 8 integers and 2 decimals
 ]);
 
 Request::validate([
-    'amount' => new DecimalsRule(20, 4) // 20 integers and 4 decimals
+    'amount' => new Decimals(20, 4) // 20 integers and 4 decimals
 ]);
 ```
 

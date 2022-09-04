@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
-use Luilliarcec\Utilities\Scopes\AuthScope;
+use Luilliarcec\Utilities\Scopes\AuthenticatedScope;
 
 /**
  * @method static static|\Illuminate\Database\Eloquent\Builder|Builder withoutAuth()
  */
-trait BelongsToAuth
+trait BelongsToAuthenticated
 {
-    public static function bootBelongsToAuth(): void
+    public static function bootBelongsToAuthenticated(): void
     {
         static::creating(function ($model) {
             $model->user()->associate(Auth::user());
         });
 
-        static::addGlobalScope(new AuthScope);
+        static::addGlobalScope(new AuthenticatedScope);
     }
 
     public function user(): BelongsTo

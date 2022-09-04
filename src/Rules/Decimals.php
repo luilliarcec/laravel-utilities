@@ -4,7 +4,7 @@ namespace Luilliarcec\Utilities\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class DecimalsRule implements Rule
+class Decimals implements Rule
 {
     private string $match;
     private int $integers;
