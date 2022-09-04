@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Luilliarcec\Utilities\Rules\Auth as AuthRules;
+use Luilliarcec\Utilities\Rules\AuthRule as AuthRules;
 use Tests\TestCase;
 use Tests\Utils\Invoice;
 use Tests\Utils\User;
