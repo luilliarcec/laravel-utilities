@@ -2,27 +2,15 @@
 
 namespace Luilliarcec\Utilities;
 
-use Illuminate\Support\ServiceProvider;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class UtilitiesServiceProvider extends ServiceProvider
+class UtilitiesServiceProvider extends PackageServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
-    public function boot()
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('utilities.php'),
-            ], 'config');
-        }
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'utilities');
+        $package
+            ->name('laravel-utilities')
+            ->hasConfigFile('utilities');
     }
 }
