@@ -8,7 +8,7 @@ return [
      * This column is used to identify the records associated with that user.
      */
 
-    'auth_foreign_id_column' => 'user_id',
+    'auth_key_name' => 'user_id',
 
     /** SetAttributesUppercase */
 
