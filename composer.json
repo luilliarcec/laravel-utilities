@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "*",
         "spatie/laravel-package-tools": "^1.12"
     },
     "require-dev": {
