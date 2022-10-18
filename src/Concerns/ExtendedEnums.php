@@ -34,6 +34,6 @@ trait ExtendedEnums
     {
         return trans()->has($key = "validation.attributes.{$name}")
             ? ucfirst(__($key))
-            : (string)Str::of($name)->headline()->ucfirst();
+            : (string) Str::of($name)->headline()->ucfirst();
     }
 }
