@@ -15,6 +15,16 @@ trait ExtendedEnums
         return $values ?? [];
     }
 
+    public static function values(): array
+    {
+        return collect(self::cases())->pluck('value')->toArray();
+    }
+
+    public static function names(): array
+    {
+        return collect(self::cases())->pluck('name')->toArray();
+    }
+
     public function title(): string
     {
         return self::cast($this->name);
