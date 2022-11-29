@@ -11,11 +11,11 @@ trait HasAuthenticatedCreator
     public static function bootHasAuthenticatedCreator(): void
     {
         static::creating(function ($model) {
-            $model->user()->associate(Auth::user());
+            $model->creator()->associate(Auth::user());
         });
     }
 
-    public function user(): BelongsTo
+    public function creator(): BelongsTo
     {
         return $this->belongsTo($model = $this->getAuthenticatedModelName(), $this->getAuthenticatedKeyNameColumn())
             ->when($this->hasSoftDeletes($model), fn ($query) => $query->withTrashed())

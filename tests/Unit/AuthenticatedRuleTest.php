@@ -24,7 +24,7 @@ class AuthenticatedRuleTest extends TestCase
         );
 
         (new Invoice())
-            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->creator()->associate(User::create(['name' => 'andres cardenas']))
             ->fill(['description' => 'Invoice 2'])
             ->saveQuietly();
 
@@ -53,7 +53,7 @@ class AuthenticatedRuleTest extends TestCase
         );
 
         (new Invoice())
-            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->creator()->associate(User::create(['name' => 'andres cardenas']))
             ->fill(['description' => 'Invoice 2'])
             ->saveQuietly();
 

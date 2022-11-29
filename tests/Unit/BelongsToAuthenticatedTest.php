@@ -21,7 +21,7 @@ class BelongsToAuthenticatedTest extends TestCase
     {
         $this->assertInstanceOf(
             \Illuminate\Database\Eloquent\Relations\BelongsTo::class,
-            (new Invoice())->user()
+            (new Invoice())->creator()
         );
     }
 
@@ -40,13 +40,13 @@ class BelongsToAuthenticatedTest extends TestCase
 
         $invoice = Invoice::create(['description' => 'Invoice 1']);
 
-        $this->assertInstanceOf(User::class, $invoice->user);
+        $this->assertInstanceOf(User::class, $invoice->creator);
     }
 
     public function test_the_global_scope_of_get_by_authenticated_user_applies()
     {
         (new Invoice())
-            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->creator()->associate(User::create(['name' => 'andres cardenas']))
             ->fill(['description' => 'Invoice 1'])
             ->saveQuietly();
 
@@ -61,7 +61,7 @@ class BelongsToAuthenticatedTest extends TestCase
     public function test_the_global_scope_is_removed_with_a_method_call()
     {
         (new Invoice())
-            ->user()->associate(User::create(['name' => 'andres cardenas']))
+            ->creator()->associate(User::create(['name' => 'andres cardenas']))
             ->fill(['description' => 'Invoice 1'])
             ->saveQuietly();
 
