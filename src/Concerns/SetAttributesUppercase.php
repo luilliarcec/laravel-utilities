@@ -30,6 +30,7 @@ trait SetAttributesUppercase
     protected function attributesIgnoredByDefault(): array
     {
         return [
+            'id',
             'token',
             'email',
             'password',
