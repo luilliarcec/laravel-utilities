@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class EnumCollection extends Collection
 {
-    public function __construct(public string $enum, $items = [])
+    public function __construct($items = [], public ?string $enum = null)
     {
         parent::__construct($items);
     }
