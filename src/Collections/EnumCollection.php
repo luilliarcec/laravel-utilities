@@ -22,7 +22,7 @@ class EnumCollection extends Collection
         return $this->pluck('name');
     }
 
-    public function toArray(): array
+    public function casted(): array
     {
         return $this
             ->reduce(

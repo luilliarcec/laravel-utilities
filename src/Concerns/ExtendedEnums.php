@@ -9,7 +9,7 @@ trait ExtendedEnums
 {
     public static function toArray(array $excepts = []): array
     {
-        return static::collection()->toArray();
+        return static::collection()->casted();
     }
 
     public static function values(): array
