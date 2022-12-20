@@ -24,7 +24,7 @@ trait ExtendedEnums
 
     public static function collection(): EnumCollection
     {
-        return new EnumCollection(static::cases(), static::class);
+        return new EnumCollection(static::cases());
     }
 
     public static function cast(mixed $name = null): string

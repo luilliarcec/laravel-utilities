@@ -7,11 +7,6 @@ use Illuminate\Support\Collection;
 
 class EnumCollection extends Collection
 {
-    public function __construct($items = [], public ?string $enum = null)
-    {
-        parent::__construct($items);
-    }
-
     public function getValues(): static
     {
         return $this->pluck('value');
@@ -27,7 +22,7 @@ class EnumCollection extends Collection
         return $this
             ->reduce(
                 function ($enums, BackedEnum $enum) {
-                    $enums[$enum->value ?? $enum->name] = $this->enum::cast($enum->name);
+                    $enums[$enum->value ?? $enum->name] = $enum::cast($enum->name);
 
                     return $enums;
                 }, []
