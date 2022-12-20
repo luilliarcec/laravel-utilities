@@ -3,7 +3,6 @@
 namespace Luilliarcec\Utilities\Collections;
 
 use BackedEnum;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
 class EnumCollection extends Collection
@@ -29,6 +28,8 @@ class EnumCollection extends Collection
             ->reduce(
                 function ($enums, BackedEnum $enum) {
                     $enums[$enum->value ?? $enum->name] = $this->enum::cast($enum->name);
+
+                    return $enums;
                 }, []
             );
     }
