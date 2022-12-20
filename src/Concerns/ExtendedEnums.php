@@ -3,31 +3,28 @@
 namespace Luilliarcec\Utilities\Concerns;
 
 use Illuminate\Support\Str;
+use Luilliarcec\Utilities\Collections\EnumCollection;
 
 trait ExtendedEnums
 {
-    public static function toArray(): array
+    public static function toArray(array $excepts = []): array
     {
-        foreach (self::cases() as $enum) {
-            $values[$enum->value ?? $enum->name] = self::cast($enum->name);
-        }
-
-        return $values ?? [];
+        return static::collection()->toArray();
     }
 
     public static function values(): array
     {
-        return collect(self::cases())->pluck('value')->toArray();
+        return static::collection()->getValues()->toArray();
     }
 
     public static function names(): array
     {
-        return collect(self::cases())->pluck('name')->toArray();
+        return static::collection()->getNames()->toArray();
     }
 
-    public function title(): string
+    public static function collection(): EnumCollection
     {
-        return self::cast($this->name);
+        return new EnumCollection(static::class, static::cases());
     }
 
     protected static function cast(mixed $name = null): string
@@ -35,5 +32,19 @@ trait ExtendedEnums
         return trans()->has($key = "validation.attributes.{$name}")
             ? ucfirst(__($key))
             : (string) Str::of($name)->headline()->ucfirst();
+    }
+
+    public function title(): string
+    {
+        return self::cast($this->name);
+    }
+
+    public function equalTo(mixed $enum): bool
+    {
+        if (is_array($enum)) {
+            return in_array($this, $enum);
+        }
+
+        return $this === $enum;
     }
 }
