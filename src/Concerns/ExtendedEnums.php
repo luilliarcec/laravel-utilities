@@ -27,7 +27,7 @@ trait ExtendedEnums
         return new EnumCollection(static::class, static::cases());
     }
 
-    protected static function cast(mixed $name = null): string
+    public static function cast(mixed $name = null): string
     {
         return trans()->has($key = "validation.attributes.{$name}")
             ? ucfirst(__($key))
